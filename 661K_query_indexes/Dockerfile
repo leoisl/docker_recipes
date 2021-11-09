@@ -11,6 +11,7 @@ ARG pandas_version=1.3.4
 ARG dendropy_version=4.5.2
 ARG sourmash_version=3.5.0
 ARG rapidnj_version=2.3.2
+ARG samtools_version=1.9-4
 
 
 # install basic dependencies
@@ -31,3 +32,6 @@ RUN python -m pip install matplotlib==$matplotlib_version pandas==$pandas_versio
 RUN wget https://github.com/johnlees/rapidnj/archive/refs/tags/${rapidnj_version}.tar.gz -O rapidnj_${rapidnj_version}.tar.gz && tar -zxvf rapidnj_${rapidnj_version}.tar.gz && rm rapidnj_${rapidnj_version}.tar.gz && cd rapidnj-${rapidnj_version} && make -j4 && cd /
 # add rapidnj to path
 ENV PATH="/rapidnj-${rapidnj_version}/bin:${PATH}"
+
+# install samtools
+RUN apt install -y samtools=$samtools_version
